@@ -2,7 +2,6 @@ import path from "path"
 import taildwindcss from "@tailwindcss/vite"
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
-import { resolve } from "dns"
 
 // https://vite.dev/config/
 export default defineConfig({
@@ -12,4 +11,10 @@ export default defineConfig({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+
+  server : {
+    proxy: {
+      "/api" : "http://localhost:5000",
+    }
+  }
 })
