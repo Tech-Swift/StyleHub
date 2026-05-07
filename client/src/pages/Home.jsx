@@ -1,11 +1,12 @@
+import Container from "../components/layout/Container";
 import Hero from "@/features/home/Hero";
 
-function Home() {
+export default function Home() {
   return (
-    <div>
-      <Hero />
-    </div>
-  )
+    <section className="py-20">
+      <Container>
+        <Hero />
+      </Container>
+    </section>
+  );
 }
-
-export default Home;

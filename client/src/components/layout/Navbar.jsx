@@ -1,4 +1,5 @@
 import { Link, useLocation } from "react-router-dom";
+import Container from "./Container";
 
 function Navbar() {
   const location = useLocation();
@@ -12,16 +13,17 @@ function Navbar() {
 
   return (
     <nav className="bg-red shadow-lg border-b border-gray-200">
-      <div className="max-w-6xl mx-auto flex justify-between items-center py-4 px-6">
-        
+      <Container className="flex justify-between items-center py-4">       
         {/* Logo */}
         <h1 className="text-xl font-bold">StyleHub</h1>
 
         {/* Links */}
-        <div className="flex gap-6">
-          <Link to="/" className={linkClass("/")}>Home</Link>
-          <Link to="/salons" className={linkClass("/salons")}>Salons</Link>
-          <Link to="/styles" className={linkClass("/styles")}>Styles</Link>
+        <div className="flex gap-8">
+          <Link to="/" className={linkClass("/")}>HOME</Link>
+          <Link to="/services" className={linkClass("/services")}>SERVICES</Link>
+          <Link to="/gallery" className={linkClass("/gallery")}>GALLERY</Link>
+          <Link to="/about" className={linkClass("/about")}>ABOUT</Link>
+          <Link to="/contact" className={linkClass("/contact")}>CONTACT</Link>
         </div>
 
         {/* Action */}
@@ -29,10 +31,10 @@ function Navbar() {
           to="/login"
           className="border border-black px-4 py-1 rounded hover:bg-black hover:text-white transition"
         >
-          Login
+          BOOK
         </Link>
+      </Container> 
 
-      </div>
     </nav>
   );
 }
