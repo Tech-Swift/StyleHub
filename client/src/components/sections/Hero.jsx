@@ -4,13 +4,13 @@ import Lady1 from "@/assets/images/Lady1.jpeg";
 
 export default function Hero() {
   return (
-    <section className="relative w-full min-h-screen flex items-center overflow-hidden bg-[#050505] pt-32 pb-20">
-      {/* Background Glow */}
+    <section className="relative w-full min-h-screen flex items-center overflow-hidden bg-background pt-32 pb-20">
+
+      {/* Background Texture */}
       <div className="absolute inset-0 opacity-[0.03] bg-[url('https://www.transparenttextures.com/patterns/asfalt-dark.png')]" />
 
       <Container>
-
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 xl:gap-20 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
 
           {/* LEFT CONTENT */}
           <div className="space-y-8 relative z-10 max-w-2xl">
@@ -21,7 +21,7 @@ export default function Hero() {
             </p>
 
             {/* Heading */}
-            <h1 className="text-5xl sm:text-6xl xl:text-7xl font-bold leading-[0.95] text-white">
+            <h1 className="text-5xl sm:text-6xl xl:text-7xl font-bold leading-[0.95] text-foreground">
 
               Modern Style <br />
 
@@ -35,26 +35,26 @@ export default function Hero() {
             </h1>
 
             {/* Paragraph */}
-            <p className="text-gray-400 text-lg xl:text-xl font-light leading-relaxed max-w-xl">
+            <p className="text-muted-foreground text-lg xl:text-xl font-light leading-relaxed max-w-xl">
               Experience luxury grooming and premium beauty services
               crafted to elevate your confidence and personal style.
             </p>
 
             {/* Buttons */}
             <div className="flex flex-col sm:flex-row gap-5">
-
-              <Button className="bg-[#D4A24C] hover:bg-[#c89235] text-black font-semibold px-8 py-7 text-base rounded-md transition duration-300">
+              <Button className="bg-[#D4A24C] hover:bg-[#c89235] text-black font-semibold px-8 py-7 text-base rounded-md transition duration-300 cursor-pointer">
                 Book Appointment
               </Button>
 
               <Button
                 variant="outline"
-                className="border border-[#D4A24C] bg-transparent text-[#D4A24C] hover:bg-[#D4A24C] hover:text-black px-8 py-7 text-base rounded-md transition duration-300"
+                className="border border-[#D4A24C] text-[#D4A24C] bg-transparent hover:bg-[#D4A24C] hover:text-black px-8 py-7 text-base rounded-md transition duration-300 cursor-pointer"
               >
                 Explore Services
               </Button>
 
             </div>
+
             {/* Stats */}
             <div className="flex flex-wrap gap-10 pt-6">
 
@@ -62,8 +62,7 @@ export default function Hero() {
                 <h3 className="text-3xl font-bold text-[#D4A24C]">
                   5+
                 </h3>
-
-                <p className="text-gray-400 text-sm uppercase tracking-wider">
+                <p className="text-muted-foreground text-sm uppercase tracking-wider">
                   Years Experience
                 </p>
               </div>
@@ -72,8 +71,7 @@ export default function Hero() {
                 <h3 className="text-3xl font-bold text-[#D4A24C]">
                   1000+
                 </h3>
-
-                <p className="text-gray-400 text-sm uppercase tracking-wider">
+                <p className="text-muted-foreground text-sm uppercase tracking-wider">
                   Happy Clients
                 </p>
               </div>
@@ -82,8 +80,7 @@ export default function Hero() {
                 <h3 className="text-3xl font-bold text-[#D4A24C]">
                   20+
                 </h3>
-
-                <p className="text-gray-400 text-sm uppercase tracking-wider">
+                <p className="text-muted-foreground text-sm uppercase tracking-wider">
                   Premium Services
                 </p>
               </div>
@@ -99,7 +96,7 @@ export default function Hero() {
             <div className="absolute w-[350px] h-[350px] bg-[#D4A24C]/20 blur-[100px] rounded-full" />
 
             {/* Image Card */}
-            <div className="relative overflow-hidden rounded-[32px] border border-white/10 shadow-2xl">
+            <div className="relative overflow-hidden rounded-[32px] border border-border shadow-2xl">
 
               <img
                 src={Lady1}
@@ -107,15 +104,14 @@ export default function Hero() {
                 className="w-full max-w-md lg:max-w-lg h-[650px] object-cover"
               />
 
-              {/* Dark Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
+              {/* Overlay */}
+              <div className="absolute inset-0 bg-gradient-to-t from-background/60 via-transparent to-transparent" />
 
             </div>
 
           </div>
 
         </div>
-
       </Container>
 
     </section>

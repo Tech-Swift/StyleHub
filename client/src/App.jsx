@@ -4,6 +4,7 @@ import Navbar from "./components/layout/Navbar";
 import Footer from "./components/layout/Footer";
 import Home from "./pages/Home";
 import { Routes, Route } from "react-router-dom";
+import { ThemeProvider } from "./components/themeProvider";
 
 function App() {
   useEffect(() => {
@@ -19,13 +20,15 @@ function App() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-white">
-      <Navbar />
-      <Routes >
-        <Route path="/" element={<Home />} />
-      </Routes>
-      <Footer />
-    </div>
+    <ThemeProvider defaultTheme="light" storageKey="stylehub-theme">
+      <div className="min-h-screen bg-white">
+        <Navbar />
+        <Routes >
+          <Route path="/" element={<Home />} />
+        </Routes>
+        <Footer />
+      </div>
+    </ThemeProvider>
   );
 }
 

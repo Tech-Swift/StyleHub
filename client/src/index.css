@@ -1,6 +1,6 @@
 @import "@fontsource-variable/inter";
-
 @import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
 
 /* ---------------------------
    Base App Reset
