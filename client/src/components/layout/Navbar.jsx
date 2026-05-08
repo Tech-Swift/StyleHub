@@ -71,7 +71,7 @@ export default function Navbar() {
 
         {/* Mobile Menu */}
         {open && (
-          <div className="flex flex-col gap-6 pt-6 md:hidden">
+          <div className="flex flex-col gap-6 pt-4 md:hidden">
 
             <Link to="/" className={linkClass("/")}>
               HOME
