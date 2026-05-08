@@ -1,4 +1,4 @@
-import { useState } from "react";
+ import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 
@@ -8,103 +8,99 @@ export default function Navbar() {
   const location = useLocation();
   const [open, setOpen] = useState(false);
 
+  const navLinks = [
+    { name: "HOME", path: "/" },
+    { name: "SERVICES", path: "/services" },
+    { name: "GALLERY", path: "/gallery" },
+    { name: "ABOUT", path: "/about" },
+    { name: "CONTACT", path: "/contact" },
+  ];
+
   const linkClass = (path) =>
-    `relative pb-1 transition ${
+    `transition duration-300 text-sm tracking-[0.2em] ${
       location.pathname === path
-        ? "text-black after:w-full"
-        : "text-gray-600 after:w-0"
-    } after:content-[''] after:absolute after:left-0 after:bottom-0 after:h-[2px] after:bg-black after:transition-all after:duration-300 hover:after:w-full`;
+        ? "text-[#D4A24C]"
+        : "text-white/80 hover:text-[#D4A24C]"
+    }`;
 
   return (
-    <nav className="shadow-lg border-b border-gray-200 bg-white">
-      
-      <Container className="py-4">
+    <header className="fixed top-0 left-0 w-full z-50 px-8 border-b border-white/10 bg-black">
 
-        {/* Navbar Top */}
-        <div className="flex items-center justify-between">
+        <div className="h-24 flex items-center justify-between">
 
           {/* Logo */}
-          <h1 className="text-xl md:text-2xl font-bold">
-            StyleHub
-          </h1>
-
-          {/* Desktop Links */}
-          <div className="hidden md:flex gap-8">
-            <Link to="/" className={linkClass("/")}>
-              HOME
-            </Link>
-
-            <Link to="/services" className={linkClass("/services")}>
-              SERVICES
-            </Link>
-
-            <Link to="/gallery" className={linkClass("/gallery")}>
-              GALLERY
-            </Link>
-
-            <Link to="/about" className={linkClass("/about")}>
-              ABOUT
-            </Link>
-
-            <Link to="/contact" className={linkClass("/contact")}>
-              CONTACT
-            </Link>
-          </div>
-
-          {/* Desktop Button */}
-          <Link
-            to="/login"
-            className="hidden md:block border border-black px-4 py-2 rounded hover:bg-black hover:text-white transition"
-          >
-            BOOK
+          <Link to="/">
+            <h1 className="text-4xl font-bold text-[#D4A24C]">
+              StyleHub
+            </h1>
           </Link>
 
-          {/* Mobile Hamburger */}
+          {/* Desktop Navigation */}
+          <nav className="hidden lg:flex items-center gap-12">
+
+            {navLinks.map((link) => (
+              <Link
+                key={link.path}
+                to={link.path}
+                className={linkClass(link.path)}
+              >
+                {link.name}
+              </Link>
+            ))}
+
+          </nav>
+
+          {/* CTA */}
+          <div className="hidden lg:block">
+
+            <button className="border border-[#D4A24C] text-[#D4A24C] px-8 py-3 rounded-md hover:bg-[#D4A24C] hover:text-black transition duration-300">
+
+              BOOK NOW
+
+            </button>
+
+          </div>
+
+          {/* Mobile Toggle */}
           <button
             onClick={() => setOpen(!open)}
-            className="md:hidden"
+            className="lg:hidden text-white"
           >
-            {open ? <X size={28} /> : <Menu size={28} />}
+            {open ? <X size={30} /> : <Menu size={30} />}
           </button>
 
         </div>
 
-        {/* Mobile Menu */}
-        {open && (
-          <div className="flex flex-col gap-6 pt-4 md:hidden">
+      
 
-            <Link to="/" className={linkClass("/")}>
-              HOME
-            </Link>
+      {/* Mobile Menu */}
+      {open && (
+        <div className="lg:hidden bg-black border-t border-white/10">
 
-            <Link to="/services" className={linkClass("/services")}>
-              SERVICES
-            </Link>
+          
 
-            <Link to="/gallery" className={linkClass("/gallery")}>
-              GALLERY
-            </Link>
+            <div className="flex flex-col gap-8 py-8">
 
-            <Link to="/about" className={linkClass("/about")}>
-              ABOUT
-            </Link>
+              {navLinks.map((link) => (
+                <Link
+                  key={link.path}
+                  to={link.path}
+                  className={linkClass(link.path)}
+                >
+                  {link.name}
+                </Link>
+              ))}
 
-            <Link to="/contact" className={linkClass("/contact")}>
-              CONTACT
-            </Link>
+              <button className="border border-[#D4A24C] text-[#D4A24C] py-3 rounded-md">
 
-            <Link
-              to="/login"
-              className="border border-black px-4 py-2 rounded text-center hover:bg-black hover:text-white transition"
-            >
-              BOOK
-            </Link>
+                BOOK NOW
 
-          </div>
-        )}
+              </button>
 
-      </Container>
+            </div>
 
-    </nav>
+        </div>
+      )}
+    </header>
   );
 }

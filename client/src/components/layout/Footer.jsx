@@ -1,34 +1,47 @@
-function Footer() {
+export default function Footer() {
   return (
-    <footer className="border-t border-gray-200 mt-16">
-      <div className="max-w-6xl mx-auto py-10 px-6 grid grid-cols-3 gap-8">
+    <footer className="border-t border-border mt-16 bg-background">
+      
+      <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-3 gap-10">
         
+        {/* Brand */}
         <div>
-          <h3 className="font-bold text-lg mb-2">StyleHub</h3>
-          <p className="text-gray-600">Your style, your identity.</p>
+          <h3 className="font-bold text-lg text-foreground mb-2">
+            StyleHub
+          </h3>
+          <p className="text-muted-foreground">
+            Your style, your identity.
+          </p>
         </div>
 
-        <div className="border-l pl-6">
-          <h4 className="font-semibold mb-2">Quick Links</h4>
-          <ul className="space-y-1 text-gray-600">
-            <li>Home</li>
-            <li>Salons</li>
-            <li>Styles</li>
+        {/* Quick Links */}
+        <div className="md:border-l md:pl-8">
+          <h4 className="font-semibold text-foreground mb-3">
+            Quick Links
+          </h4>
+          <ul className="space-y-2 text-muted-foreground">
+            <li className="hover:text-foreground cursor-pointer">Home</li>
+            <li className="hover:text-foreground cursor-pointer">Salons</li>
+            <li className="hover:text-foreground cursor-pointer">Styles</li>
           </ul>
         </div>
 
-        <div className="border-l pl-6">
-          <h4 className="font-semibold mb-2">Contact</h4>
-          <p className="text-gray-600">support@stylehub.com</p>
+        {/* Contact */}
+        <div className="md:border-l md:pl-8">
+          <h4 className="font-semibold text-foreground mb-3">
+            Contact
+          </h4>
+          <p className="text-muted-foreground">
+            support@stylehub.com
+          </p>
         </div>
 
       </div>
 
-      <div className="border-t text-center py-4 text-sm text-gray-500">
+      {/* Bottom bar */}
+      <div className="border-t border-border text-center py-4 text-sm text-muted-foreground">
         © {new Date().getFullYear()} StyleHub
       </div>
     </footer>
   );
 }
-
-export default Footer;
