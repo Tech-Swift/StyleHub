@@ -5,8 +5,8 @@ export default function ServiceCard({ service }) {
 
   return (
     <div className="group w-[200px] sm:w-[220px] bg-white dark:bg-[#0b0b0b] rounded-xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-300 border border-gray-100 dark:border-gray-800">
-      
-      {/* IMAGE (1:2 RATIO) */}
+
+      {/* IMAGE */}
       <div className="relative aspect-[4/5] overflow-hidden">
         <img
           src={imageUrl}
@@ -14,12 +14,12 @@ export default function ServiceCard({ service }) {
           className="w-full h-full object-cover object-top group-hover:scale-110 transition-transform duration-700"
         />
 
-        {/* overlay for depth */}
+        {/* overlay */}
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
 
-        {/* Category */}
+        {/* Category (FIXED) */}
         <span className="absolute top-2 left-2 bg-black/60 text-white text-[10px] px-2 py-0.5 rounded-full backdrop-blur">
-          {service.category}
+          {service.categoryId?.name}
         </span>
 
         {/* Price */}
@@ -28,9 +28,9 @@ export default function ServiceCard({ service }) {
         </span>
       </div>
 
-      {/* CONTENT (VERY MINIMAL) */}
-      <div className="p-3 space-y-1.5 -translate-y-2">
-        
+      {/* CONTENT */}
+      <div className="p-3 space-y-1.5">
+
         <h3 className="text-sm font-semibold text-gray-900 dark:text-white line-clamp-1">
           {service.title}
         </h3>

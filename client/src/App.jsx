@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import api from "./api/client";
+import Container from "./components/layout/Container";
 import Navbar from "./components/layout/Navbar";
 import Footer from "./components/layout/Footer";
 import Home from "./pages/Home";

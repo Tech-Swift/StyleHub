@@ -1,85 +1,169 @@
 import { useEffect, useState } from "react";
+import Container from "@/components/layout/Container";
 import api from "@/api/client";
 import ServiceCard from "@/components/cards/ServiceCard";
 
 export default function ServiceSection() {
   const [services, setServices] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState(null);
+  const [searchQuery, setSearchQuery] = useState("");
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchServices = async () => {
+    const fetchData = async () => {
       try {
-        const res = await api.get("/services");
-        setServices(res.data);
+        const [servicesRes, categoriesRes] = await Promise.all([
+          api.get("/services"),
+          api.get("/categories"),
+        ]);
+
+        setServices(servicesRes.data);
+        setCategories(categoriesRes.data);
       } catch (error) {
-        console.error("Failed to fetch services:", error);
+        console.error("Failed to fetch data:", error);
       } finally {
         setLoading(false);
       }
     };
 
-    fetchServices();
+    fetchData();
   }, []);
 
+  // FILTER LOGIC
+  const filteredServices = services.filter((service) => {
+    const matchesCategory =
+      !selectedCategory ||
+      service.categoryId?._id === selectedCategory;
+
+    const matchesSearch =
+      service.title
+        ?.toLowerCase()
+        .includes(searchQuery.toLowerCase()) ||
+      service.description
+        ?.toLowerCase()
+        .includes(searchQuery.toLowerCase());
+
+    return matchesCategory && matchesSearch;
+  });
+
   return (
-    <section className="py-16 bg-white dark:bg-[#050505] transition-colors duration-300">
-      
-      {/* HEADER (Marketplace style) */}
-      <div className="max-w-6xl mx-auto px-4 mb-8">
-        <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white text-center">
-          Discover Premium Services
-        </h2>
+    <section className="relative w-full py-20 bg-white dark:bg-[#050505] overflow-hidden transition-colors duration-300">
 
-        <p className="text-gray-600 dark:text-gray-300 text-center max-w-2xl mx-auto mt-3">
-          Explore curated beauty and grooming experiences crafted by top professionals.
-        </p>
+      {/* Background Texture */}
+      <div className="absolute inset-0 opacity-[0.03] bg-[url('https://www.transparenttextures.com/patterns/asfalt-dark.png')]" />
 
-        {/* optional filter row (future upgrade ready) */}
-        <div className="flex justify-center gap-3 mt-5 flex-wrap">
-          <span className="px-4 py-2 text-xs rounded-full bg-black text-white dark:bg-white dark:text-black">
-            All
-          </span>
-          <span className="px-4 py-2 text-xs rounded-full border border-gray-300 dark:border-gray-700">
-            Hair
-          </span>
-          <span className="px-4 py-2 text-xs rounded-full border border-gray-300 dark:border-gray-700">
-            Nails
-          </span>
-          <span className="px-4 py-2 text-xs rounded-full border border-gray-300 dark:border-gray-700">
-            Spa
-          </span>
-        </div>
-      </div>
+      <Container fluid>
+        <div className="px-6 sm:px-10 lg:px-16 relative z-10">
 
-      {/* CONTENT GRID (Airbnb-style flexible layout) */}
-      <div className="max-w-6xl mx-auto px-4">
-        
-        {loading && (
-          <div className="flex flex-wrap justify-center gap-6">
-            {[...Array(6)].map((_, i) => (
-              <div
-                key={i}
-                className="w-[260px] sm:w-[280px] h-[380px] bg-gray-200 dark:bg-gray-800 animate-pulse rounded-2xl"
+          {/* HEADER */}
+          <div className="mb-12">
+
+            <p className="text-sm uppercase tracking-[0.3em] text-[#D4A24C] text-center">
+              Premium Beauty Collection
+            </p>
+
+            <h2 className="mt-4 text-4xl sm:text-5xl font-bold text-center text-foreground leading-tight">
+              Discover Premium <br />
+
+              <span className="text-[#D4A24C]">
+                Services
+              </span>
+            </h2>
+
+            <p className="mt-5 text-center text-muted-foreground text-lg max-w-2xl mx-auto leading-relaxed">
+              Explore curated beauty and grooming experiences crafted
+              by elite professionals for modern luxury and confidence.
+            </p>
+
+            {/* SEARCH */}
+            <div className="mt-8 flex justify-center">
+              <input
+                type="text"
+                placeholder="Search services..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="w-full max-w-md px-5 py-3 text-sm rounded-full border border-border bg-background text-foreground outline-none focus:ring-2 focus:ring-[#D4A24C]"
               />
-            ))}
-          </div>
-        )}
+            </div>
 
-        {!loading && services.length === 0 && (
-          <div className="text-center text-gray-500 dark:text-gray-400">
-            No services available at the moment.
-          </div>
-        )}
+            {/* CATEGORY FILTERS */}
+            <div className="flex justify-center gap-3 mt-6 flex-wrap">
 
-        {!loading && services.length > 0 && (
-          <div className="flex flex-wrap justify-center gap-6">
-            {services.map((service) => (
-              <ServiceCard key={service._id} service={service} />
-            ))}
-          </div>
-        )}
+              {/* ALL */}
+              <button
+                onClick={() => setSelectedCategory(null)}
+                className={`px-5 py-2 text-xs rounded-full transition-all duration-300 ${
+                  selectedCategory === null
+                    ? "bg-[#D4A24C] text-black"
+                    : "border border-border text-foreground hover:border-[#D4A24C]"
+                }`}
+              >
+                All
+              </button>
 
-      </div>
+              {/* DYNAMIC CATEGORIES */}
+              {categories.map((cat) => (
+                <button
+                  key={cat._id}
+                  onClick={() => setSelectedCategory(cat._id)}
+                  className={`px-5 py-2 text-xs rounded-full transition-all duration-300 ${
+                    selectedCategory === cat._id
+                      ? "bg-[#D4A24C] text-black"
+                      : "border border-border text-foreground hover:border-[#D4A24C]"
+                  }`}
+                >
+                  {cat.name}
+                </button>
+              ))}
+
+            </div>
+
+          </div>
+
+          {/* CONTENT */}
+          <div>
+
+            {/* LOADING */}
+            {loading && (
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-6">
+
+                {[...Array(6)].map((_, i) => (
+                  <div
+                    key={i}
+                    className="h-[360px] rounded-2xl bg-gray-200 dark:bg-gray-800 animate-pulse"
+                  />
+                ))}
+
+              </div>
+            )}
+
+            {/* EMPTY */}
+            {!loading && filteredServices.length === 0 && (
+              <div className="text-center py-20 text-muted-foreground">
+                No services found matching your filters.
+              </div>
+            )}
+
+            {/* GRID */}
+            {!loading && filteredServices.length > 0 && (
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-6">
+
+                {filteredServices.map((service) => (
+                  <ServiceCard
+                    key={service._id}
+                    service={service}
+                  />
+                ))}
+
+              </div>
+            )}
+
+          </div>
+
+        </div>
+      </Container>
+
     </section>
   );
 }

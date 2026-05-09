@@ -8,13 +8,20 @@ import connectDB from "./config/db.js";
 // Routes
 import testRoutes from "./routes/testRoutes.js";
 import serviceRoutes from "./routes/serviceRoutes.js";
+import categoryRoutes from "./routes/categoryRoutes.js"
 
 dotenv.config();
 
 const app = express();
 
 // Middleware
-app.use(cors());
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+    credentials: true,
+  }
+));
+
 app.use(express.json());
 
 // DB connection
@@ -26,6 +33,7 @@ app.use("/uploads", express.static(path.resolve("uploads")));
 // Routes
 app.use("/api/test", testRoutes);
 app.use("/api/services", serviceRoutes);
+app.use("/api/categories", categoryRoutes);
 
 // Health checks
 app.get("/", (req, res) => {

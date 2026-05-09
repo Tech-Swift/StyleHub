@@ -13,14 +13,16 @@ export const createService = async (serviceData) => {
  * GET ALL SERVICES
  */
 export const getAllServices = async () => {
-  return await Service.find().sort({ createdAt: -1 });
+  return await Service.find()
+  .populate("category")
+  .sort({ createdAt: -1 });
 };
 
 /**
  * GET SINGLE SERVICE
  */
 export const getServiceById = async (serviceId) => {
-  return await Service.findById(serviceId);
+  return await Service.findById(serviceId).populate("category");
 };
 
 /**

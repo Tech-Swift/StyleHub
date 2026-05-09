@@ -9,7 +9,8 @@ export default function Hero() {
       {/* Background Texture */}
       <div className="absolute inset-0 opacity-[0.03] bg-[url('https://www.transparenttextures.com/patterns/asfalt-dark.png')]" />
 
-      <Container>
+      <Container fluid>
+        <div className="px-6 sm:px-10 lg:px-16">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
 
           {/* LEFT CONTENT */}
@@ -111,6 +112,7 @@ export default function Hero() {
           </div>
 
         </div>
+      </div>  
       </Container>
 
     </section>

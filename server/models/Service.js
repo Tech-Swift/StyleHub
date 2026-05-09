@@ -29,18 +29,9 @@ const serviceSchema = new mongoose.Schema(
     },
 
     category: {
-      type: String,
-      required: [true, "Service category is required"],
-      enum: [
-        "Hair",
-        "Braiding",
-        "Nails",
-        "Makeup",
-        "Facial",
-        "Barber",
-        "Spa",
-        "Other",
-      ],
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Category",
+      required: true,
     },
 
     featured: {

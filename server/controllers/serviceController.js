@@ -18,6 +18,12 @@ export const createServiceController = async (req, res) => {
       });
     }
 
+    if (!category) {
+      return res.status(400).json({
+        message: "Category is required",
+      });
+    }
+
     const serviceData = {
       title,
       description,
