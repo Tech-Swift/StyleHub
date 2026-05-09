@@ -4,7 +4,7 @@ import Lady1 from "@/assets/images/Lady1.jpeg";
 
 export default function Hero() {
   return (
-    <section className="relative w-full min-h-screen flex items-center overflow-hidden bg-background pt-32 pb-20">
+    <section className="relative w-full min-h-screen flex items-center overflow-hidden bg-background pt-32 pb-4">
 
       {/* Background Texture */}
       <div className="absolute inset-0 opacity-[0.03] bg-[url('https://www.transparenttextures.com/patterns/asfalt-dark.png')]" />

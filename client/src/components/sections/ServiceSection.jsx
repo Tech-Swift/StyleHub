@@ -48,13 +48,13 @@ export default function ServiceSection() {
   });
 
   return (
-    <section className="relative w-full py-20 bg-white dark:bg-[#050505] overflow-hidden transition-colors duration-300">
+    <section className="relative w-full py-6 bg-white dark:bg-[#050505] overflow-hidden transition-colors duration-300">
 
       {/* Background Texture */}
       <div className="absolute inset-0 opacity-[0.03] bg-[url('https://www.transparenttextures.com/patterns/asfalt-dark.png')]" />
 
       <Container fluid>
-        <div className="px-6 sm:px-10 lg:px-16 relative z-10">
+        <div className="px-4 sm:px-10 lg:px-6 relative z-10">
 
           {/* HEADER */}
           <div className="mb-12">
