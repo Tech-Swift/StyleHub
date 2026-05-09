@@ -20,6 +20,10 @@ export default function ServiceSection() {
 
         setServices(servicesRes.data);
         setCategories(categoriesRes.data);
+
+      console.log("SAMPLE SERVICE:", servicesRes.data[0]);
+      console.log("SERVICES FROM API:", servicesRes.data);
+      console.log("CATEGORIES FROM API:", categoriesRes.data);
       } catch (error) {
         console.error("Failed to fetch data:", error);
       } finally {

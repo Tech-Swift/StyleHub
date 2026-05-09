@@ -4,7 +4,6 @@ import Service from "../models/Service.js";
  * CREATE SERVICE
  */
 export const createService = async (serviceData) => {
-  // serviceData MUST already include image path from controller
   const service = await Service.create(serviceData);
   return service;
 };
@@ -13,31 +12,36 @@ export const createService = async (serviceData) => {
  * GET ALL SERVICES
  */
 export const getAllServices = async () => {
+  console.log("✔ SERVICE LAYER ACTIVE");
   return await Service.find()
-  .populate("category")
-  .sort({ createdAt: -1 });
+    .populate("categoryId")
+    .sort({ createdAt: -1 });
 };
 
 /**
  * GET SINGLE SERVICE
  */
 export const getServiceById = async (serviceId) => {
-  return await Service.findById(serviceId).populate("category");
+  return await Service.findById(serviceId)
+    .populate("categoryId");
 };
 
 /**
  * UPDATE SERVICE
- * - supports optional image replacement
  */
-export const updateService = async (serviceId, updatedData) => {
-  const updatedService = await Service.findByIdAndUpdate(
-    serviceId,
-    updatedData,
-    {
-      new: true,
-      runValidators: true,
-    }
-  );
+export const updateService = async (
+  serviceId,
+  updatedData
+) => {
+  const updatedService =
+    await Service.findByIdAndUpdate(
+      serviceId,
+      updatedData,
+      {
+        new: true,
+        runValidators: true,
+      }
+    ).populate("categoryId");
 
   return updatedService;
 };

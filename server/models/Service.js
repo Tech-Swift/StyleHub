@@ -28,7 +28,7 @@ const serviceSchema = new mongoose.Schema(
       required: [true, "Service image is required"],
     },
 
-    category: {
+    categoryId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Category",
       required: true,

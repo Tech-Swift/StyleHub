@@ -6,19 +6,29 @@ import {
   deleteService,
 } from "../services/servicesService.js";
 
-export const createServiceController = async (req, res) => {
+export const createServiceController = async (
+  req,
+  res
+) => {
   try {
-    const { title, description, price, category, featured, available } =
-      req.body;
+    const {
+      title,
+      description,
+      price,
+      categoryId,
+      featured,
+      available,
+    } = req.body;
 
-    // Multer file check
+    // IMAGE CHECK
     if (!req.file) {
       return res.status(400).json({
         message: "Service image is required",
       });
     }
 
-    if (!category) {
+    // CATEGORY CHECK
+    if (!categoryId) {
       return res.status(400).json({
         message: "Category is required",
       });
@@ -28,13 +38,15 @@ export const createServiceController = async (req, res) => {
       title,
       description,
       price,
-      category,
+      categoryId,
       featured,
       available,
       image: `/uploads/services/${req.file.filename}`,
     };
 
-    const service = await createService(serviceData);
+    const service = await createService(
+      serviceData
+    );
 
     res.status(201).json(service);
   } catch (error) {
@@ -49,7 +61,8 @@ export const getAllServicesController = async (
   res
 ) => {
   try {
-    const services = await getAllServices();
+    const services =
+      await getAllServices();
 
     res.status(200).json(services);
   } catch (error) {
@@ -64,9 +77,10 @@ export const getServiceByIdController = async (
   res
 ) => {
   try {
-    const service = await getServiceById(
-      req.params.id
-    );
+    const service =
+      await getServiceById(
+        req.params.id
+      );
 
     if (!service) {
       return res.status(404).json({
@@ -82,29 +96,39 @@ export const getServiceByIdController = async (
   }
 };
 
-export const updateServiceController = async (req, res) => {
+export const updateServiceController = async (
+  req,
+  res
+) => {
   try {
-    const { title, description, price, category, featured, available } =
-      req.body;
+    const {
+      title,
+      description,
+      price,
+      categoryId,
+      featured,
+      available,
+    } = req.body;
 
     const updatedData = {
       title,
       description,
       price,
-      category,
+      categoryId,
       featured,
       available,
     };
 
-    // ONLY overwrite image if new file is uploaded
+    // OPTIONAL IMAGE UPDATE
     if (req.file) {
       updatedData.image = `/uploads/services/${req.file.filename}`;
     }
 
-    const updatedService = await updateService(
-      req.params.id,
-      updatedData
-    );
+    const updatedService =
+      await updateService(
+        req.params.id,
+        updatedData
+      );
 
     if (!updatedService) {
       return res.status(404).json({
@@ -125,9 +149,10 @@ export const deleteServiceController = async (
   res
 ) => {
   try {
-    const deletedService = await deleteService(
-      req.params.id
-    );
+    const deletedService =
+      await deleteService(
+        req.params.id
+      );
 
     if (!deletedService) {
       return res.status(404).json({
@@ -136,7 +161,8 @@ export const deleteServiceController = async (
     }
 
     res.status(200).json({
-      message: "Service deleted successfully",
+      message:
+        "Service deleted successfully",
     });
   } catch (error) {
     res.status(500).json({
