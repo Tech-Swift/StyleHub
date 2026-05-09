@@ -4,10 +4,10 @@ export default function ServiceCard({ service }) {
   const imageUrl = `http://localhost:5000${service.image}`;
 
   return (
-    <div className="group w-[200px] sm:w-[220px] bg-white dark:bg-[#0b0b0b] rounded-xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-300 border border-gray-100 dark:border-gray-800">
+    <div className="group w-full min-w-0 bg-white dark:bg-[#0b0b0b] rounded-xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-300 border border-gray-100 dark:border-gray-800">
 
       {/* IMAGE */}
-      <div className="relative aspect-[4/5] overflow-hidden">
+      <div className="relative aspect-[4/4.8] sm:aspect-[4/5] overflow-hidden">
         <img
           src={imageUrl}
           alt={service.title}
@@ -29,13 +29,13 @@ export default function ServiceCard({ service }) {
       </div>
 
       {/* CONTENT */}
-      <div className="p-3 space-y-1.5">
+      <div className="p-2.5 sm:p-3 space-y-1">
 
-        <h3 className="text-sm font-semibold text-gray-900 dark:text-white line-clamp-1">
+        <h3 className="text-[13px] sm:text-sm font-semibold text-gray-900 dark:text-white line-clamp-1">
           {service.title}
         </h3>
 
-        <p className="text-[11px] text-gray-500 dark:text-gray-400 line-clamp-2">
+        <p className="text-[10px] sm:text-[11px] text-gray-500 dark:text-gray-400 line-clamp-2">
           {service.description}
         </p>
 

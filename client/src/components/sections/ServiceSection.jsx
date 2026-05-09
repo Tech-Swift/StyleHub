@@ -58,7 +58,7 @@ export default function ServiceSection() {
       <div className="absolute inset-0 opacity-[0.03] bg-[url('https://www.transparenttextures.com/patterns/asfalt-dark.png')]" />
 
       <Container fluid>
-        <div className="px-4 sm:px-10 lg:px-6 relative z-10">
+        <div className="px-4 sm:px-6 lg:px-8 relative z-10">
 
           {/* HEADER */}
           <div className="mb-12">
@@ -67,8 +67,9 @@ export default function ServiceSection() {
               Premium Beauty Collection
             </p>
 
-            <h2 className="mt-4 text-4xl sm:text-5xl font-bold text-center text-foreground leading-tight">
-              Discover Premium <br />
+            <h2 className="mt-4 text-3xl sm:text-4xl md:text-5xl font-bold text-center text-foreground leading-tight">
+              Discover Premium 
+              <br />
 
               <span className="text-[#D4A24C]">
                 Services
@@ -87,12 +88,12 @@ export default function ServiceSection() {
                 placeholder="Search services..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full max-w-md px-5 py-3 text-sm rounded-full border border-border bg-background text-foreground outline-none focus:ring-2 focus:ring-[#D4A24C]"
+                className="w-full sm:max-w-md px-4 sm:px-5 py-3 text-sm rounded-full border border-border bg-background text-foreground outline-none focus:ring-2 focus:ring-[#D4A24C]"
               />
             </div>
 
             {/* CATEGORY FILTERS */}
-            <div className="flex justify-center gap-3 mt-6 flex-wrap">
+            <div className="flex justify-start sm:justify-center gap-3 mt-6 flex-nowrap sm:flex-wrap overflow-x-auto scrollbar-hide pb-2">
 
               {/* ALL */}
               <button
@@ -130,17 +131,17 @@ export default function ServiceSection() {
 
             {/* LOADING */}
             {loading && (
-              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-6">
+                <div className="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-4 sm:gap-6">
 
-                {[...Array(6)].map((_, i) => (
-                  <div
-                    key={i}
-                    className="h-[360px] rounded-2xl bg-gray-200 dark:bg-gray-800 animate-pulse"
-                  />
-                ))}
+                  {[...Array(6)].map((_, i) => (
+                    <div
+                      key={i}
+                      className="h-[360px] rounded-2xl bg-gray-200 dark:bg-gray-800 animate-pulse"
+                    />
+                  ))}
 
-              </div>
-            )}
+                </div>
+              )}
 
             {/* EMPTY */}
             {!loading && filteredServices.length === 0 && (
@@ -151,8 +152,7 @@ export default function ServiceSection() {
 
             {/* GRID */}
             {!loading && filteredServices.length > 0 && (
-              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-6">
-
+              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-3 sm:gap-5">
                 {filteredServices.map((service) => (
                   <ServiceCard
                     key={service._id}
