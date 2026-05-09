@@ -1,8 +1,11 @@
-import Container from "../components/layout/Container";
 import Hero from "@/components/sections/Hero";
+import ServiceSection from "@/components/sections/ServiceSection";
 
 export default function Home() {
   return (
-        <Hero />
+    <>
+      <Hero />
+      <ServiceSection />
+    </>
   );
 }

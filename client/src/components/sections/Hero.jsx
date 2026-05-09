@@ -42,13 +42,12 @@ export default function Hero() {
 
             {/* Buttons */}
             <div className="flex flex-col sm:flex-row gap-5">
-              <Button className="bg-[#D4A24C] hover:bg-[#c89235] text-black font-semibold px-8 py-7 text-base rounded-md transition duration-300 cursor-pointer">
+              <Button  variant="brand" size="lg" className="cursor-pointer">
                 Book Appointment
               </Button>
 
               <Button
-                variant="outline"
-                className="border border-[#D4A24C] text-[#D4A24C] bg-transparent hover:bg-[#D4A24C] hover:text-black px-8 py-7 text-base rounded-md transition duration-300 cursor-pointer"
+                variant="brandOutline" size="lg"
               >
                 Explore Services
               </Button>
