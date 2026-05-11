@@ -33,7 +33,7 @@ const OurWork = () => {
 
   if (loading) {
     return (
-      <section className="bg-black py-20 text-white text-center">
+      <section className="bg-background py-20 text-foreground text-center">
         Loading...
       </section>
     );
@@ -41,20 +41,36 @@ const OurWork = () => {
 
   if (error) {
     return (
-      <section className="bg-black py-20 text-red-500 text-center">
+      <section className="bg-background py-20 text-destructive text-center">
         {error}
       </section>
     );
   }
 
   return (
-    <section className="bg-black py-20 border-t border-[#1f1f1f]">
+    <section className="bg-background py-20 border-t border-border transition-colors">
       <div className="max-w-7xl mx-auto px-6">
-        <h2 className="text-center text-[#d4a24c] uppercase tracking-[4px] text-sm mb-14">
+        <h2
+          className="
+            text-center
+            text-[#d4a24c]
+            uppercase
+            tracking-[4px]
+            text-sm
+            mb-14
+          "
+        >
           Our Work
         </h2>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+        <div
+          className="
+            grid grid-cols-2
+            md:grid-cols-3
+            lg:grid-cols-6
+            gap-4
+          "
+        >
           {gallery.map((item) => (
             <GalleryCard
               key={item._id}
@@ -64,8 +80,22 @@ const OurWork = () => {
           ))}
         </div>
 
-        <div className="flex justify-center mt-10">
-          <button className="border border-[#d4a24c] text-[#d4a24c] px-8 py-3 rounded-md hover:bg-[#d4a24c] hover:text-black transition cursor-pointer">
+        <div className="flex justify-center mt-12">
+          <button
+            className="
+              border border-[#d4a24c]
+              text-[#d4a24c]
+              bg-transparent
+              px-8 py-3
+              rounded-xl
+              font-medium
+              transition-all duration-300
+              hover:bg-[#d4a24c]
+              hover:text-black
+              hover:shadow-lg
+              cursor-pointer
+            "
+          >
             View Gallery
           </button>
         </div>
