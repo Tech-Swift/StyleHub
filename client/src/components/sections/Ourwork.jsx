@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 
-import api from "@/api/client";
+import GalleryCard from "../cards/GalleryCard";
 
-import FeatureCard from "../cards/FeatureCard";
+import { getGallery } from "../../api/galleryApi";
 
-const WhyChooseUs = () => {
-  const [features, setFeatures] = useState([]);
+const OurWork = () => {
+  const [gallery, setGallery] = useState([]);
 
   const [loading, setLoading] =
     useState(true);
@@ -13,24 +13,22 @@ const WhyChooseUs = () => {
   const [error, setError] = useState("");
 
   useEffect(() => {
-    const fetchFeatures = async () => {
+    const fetchGallery = async () => {
       try {
-        const response = await api.get(
-          "/features"
-        );
+        const data = await getGallery();
 
-        setFeatures(response.data);
+        setGallery(data);
       } catch (error) {
         setError(
           error.response?.data?.message ||
-            "Failed to fetch features"
+            "Failed to fetch gallery"
         );
       } finally {
         setLoading(false);
       }
     };
 
-    fetchFeatures();
+    fetchGallery();
   }, []);
 
   if (loading) {
@@ -53,22 +51,27 @@ const WhyChooseUs = () => {
     <section className="bg-black py-20 border-t border-[#1f1f1f]">
       <div className="max-w-7xl mx-auto px-6">
         <h2 className="text-center text-[#d4a24c] uppercase tracking-[4px] text-sm mb-14">
-          Why Choose Us
+          Our Work
         </h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
-          {features.map((feature) => (
-            <FeatureCard
-              key={feature._id}
-              iconName={feature.icon}
-              title={feature.title}
-              description={feature.description}
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+          {gallery.map((item) => (
+            <GalleryCard
+              key={item._id}
+              image={item.image}
+              title={item.title}
             />
           ))}
+        </div>
+
+        <div className="flex justify-center mt-10">
+          <button className="border border-[#d4a24c] text-[#d4a24c] px-8 py-3 rounded-md hover:bg-[#d4a24c] hover:text-black transition cursor-pointer">
+            View Gallery
+          </button>
         </div>
       </div>
     </section>
   );
 };
 
-export default WhyChooseUs;
+export default OurWork;
