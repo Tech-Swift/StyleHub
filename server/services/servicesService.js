@@ -12,7 +12,6 @@ export const createService = async (serviceData) => {
  * GET ALL SERVICES
  */
 export const getAllServices = async () => {
-  console.log("✔ SERVICE LAYER ACTIVE");
   return await Service.find()
     .populate("categoryId")
     .sort({ createdAt: -1 });

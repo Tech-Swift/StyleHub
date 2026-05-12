@@ -1,12 +1,11 @@
 import { useEffect } from "react";
 import api from "./api/client";
-import Container from "./components/layout/Container";
 import Navbar from "./components/layout/Navbar";
 import Footer from "./components/layout/Footer";
 import Home from "./pages/Home";
 import { Routes, Route } from "react-router-dom";
 import { ThemeProvider } from "./components/themeProvider";
-
+import { Toaster } from "sonner";
 function App() {
   useEffect(() => {
     api.post("/test", {
@@ -22,6 +21,7 @@ function App() {
 
   return (
     <ThemeProvider defaultTheme="light" storageKey="stylehub-theme">
+      <Toaster richColors position="top-right" />
       <div className="min-h-screen bg-white">
         <Navbar />
         <Routes >
