@@ -11,6 +11,7 @@ import serviceRoutes from "./routes/serviceRoutes.js";
 import categoryRoutes from "./routes/categoryRoutes.js";
 import featureRoutes from  "./routes/featureRoutes.js";
 import galleryRoutes from "./routes/galleryRoutes.js";
+import testimonialRoutes from "./routes/testimonialRoutes.js"
 
 
 // Middleware
@@ -43,7 +44,7 @@ app.use("/api/services", serviceRoutes);
 app.use("/api/categories", categoryRoutes);
 app.use("/api/features", featureRoutes);
 app.use("/api/gallery", galleryRoutes);
-
+app.use("/api/testimonials", testimonialRoutes);
 
 //using of middleware
 app.use(notFoundMiddleware);
