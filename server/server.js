@@ -6,7 +6,7 @@ import path from "path";
 import connectDB from "./config/db.js";
 
 // Routes
-import testRoutes from "./routes/testRoutes.js";
+import authRoutes from "./routes/authRoutes.js";
 import serviceRoutes from "./routes/serviceRoutes.js";
 import categoryRoutes from "./routes/categoryRoutes.js";
 import featureRoutes from  "./routes/featureRoutes.js";
@@ -40,7 +40,7 @@ connectDB();
 app.use("/uploads", express.static(path.resolve("uploads")));
 
 // Routes
-app.use("/api/test", testRoutes);
+app.use("/api/auth", authRoutes);
 app.use("/api/services", serviceRoutes);
 app.use("/api/categories", categoryRoutes);
 app.use("/api/features", featureRoutes);
