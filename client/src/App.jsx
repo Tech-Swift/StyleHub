@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import api from "./api/client";
 import Navbar from "./components/layout/Navbar";
 import Footer from "./components/layout/Footer";
+import AuthPage from "@/pages/AuthPage";
 import Home from "./pages/Home";
 import { Routes, Route } from "react-router-dom";
 import { ThemeProvider } from "./components/themeProvider";
@@ -26,6 +27,7 @@ function App() {
         <Navbar />
         <Routes >
           <Route path="/" element={<Home />} />
+          <Route path="/auth" element={<AuthPage />} />
         </Routes>
         <Footer />
       </div>
