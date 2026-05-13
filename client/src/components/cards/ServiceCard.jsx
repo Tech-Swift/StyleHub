@@ -1,6 +1,6 @@
-import { Button } from "@/components/ui/button";
+import BookButton from "@/components/ui/BookButton";
 
-export default function ServiceCard({ service }) {
+export default function ServiceCard({ service, onRequireAuth }) {
   const imageUrl = `http://localhost:5000${service.image}`;
 
   return (
@@ -14,15 +14,12 @@ export default function ServiceCard({ service }) {
           className="w-full h-full object-cover object-top group-hover:scale-110 transition-transform duration-700"
         />
 
-        {/* overlay */}
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
 
-        {/* Category (FIXED) */}
         <span className="absolute top-2 left-2 bg-black/60 text-white text-[10px] px-2 py-0.5 rounded-full backdrop-blur">
           {service.categoryId?.name}
         </span>
 
-        {/* Price */}
         <span className="absolute top-2 right-2 bg-white/90 dark:bg-black/70 text-black dark:text-white text-[11px] font-semibold px-2 py-0.5 rounded-full">
           ${service.price}
         </span>
@@ -42,23 +39,20 @@ export default function ServiceCard({ service }) {
         {/* FOOTER */}
         <div className="flex items-center justify-between pt-2">
 
-          <span
-            className={`text-[10px] px-2 py-0.5 rounded-full ${
-              service.available
-                ? "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400"
-                : "bg-red-100 text-red-600 dark:bg-red-900/30 dark:text-red-400"
-            }`}
-          >
+          <span className={`text-[10px] px-2 py-0.5 rounded-full ${
+            service.available
+              ? "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400"
+              : "bg-red-100 text-red-600 dark:bg-red-900/30 dark:text-red-400"
+          }`}>
             {service.available ? "Available" : "Unavailable"}
           </span>
 
-          <Button
-            variant="brand"
-            size="sm"
+          <BookButton
             className="text-[11px] px-3 py-1"
+            onRequireAuth={onRequireAuth}
           >
             Book
-          </Button>
+          </BookButton>
 
         </div>
       </div>
