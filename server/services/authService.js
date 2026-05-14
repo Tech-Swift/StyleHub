@@ -2,77 +2,81 @@ import bcrypt from "bcryptjs";
 import User from "../models/User.js";
 import generateToken from "../utils/generateToken.js";
 
-export const registerUser = async ({ name, email, password }) => {
-  try {
-    // Check if user exists
-    const existingUser = await User.findOne({ email });
+// ======================
+// REGISTER USER
+// ======================
 
-    if (existingUser) {
-      throw new Error("User with this email already exists");
-    }
+export const registerUserService = async ({
+  name,
+  email,
+  password,
+}) => {
+  const existingUser = await User.findOne({ email });
 
-    // Hash password
-    const hashedPassword = await bcrypt.hash(password, 10);
-
-    // Create user
-    const user = await User.create({
-      name,
-      email,
-      password: hashedPassword,
-    });
-
-    // Generate token
-    const token = generateToken(user._id);
-
-    return {
-      id: user._id,
-      name: user.name,
-      email: user.email,
-      role: user.role,
-      token,
-    };
-  } catch (error) {
-    // Validation errors
-    if (error.name === "ValidationError") {
-      throw new Error("Please provide all required fields");
-    }
-
-    // Duplicate email
-    if (error.code === 11000) {
-      throw new Error("User with this email already exists");
-    }
-
-    throw error;
+  if (existingUser) {
+    throw new Error("User already exists");
   }
+
+  const hashedPassword = await bcrypt.hash(password, 10);
+
+  const user = await User.create({
+    name,
+    email,
+    password: hashedPassword,
+  });
+
+  const token = generateToken(user._id);
+
+  return {
+    _id: user._id,
+    name: user.name,
+    email: user.email,
+    role: user.role,
+    token,
+  };
 };
 
-export const loginUser = async ({ email, password }) => {
-  try {
-    // Find user
-    const user = await User.findOne({ email });
 
-    if (!user) {
-      throw new Error("Invalid email or password");
-    }
+// ======================
+// LOGIN USER
+// ======================
 
-    // Compare password
-    const isMatch = await bcrypt.compare(password, user.password);
+export const loginUserService = async ({
+  email,
+  password,
+}) => {
+  const user = await User.findOne({
+    email,
+  }).select("+password");
 
-    if (!isMatch) {
-      throw new Error("Invalid email or password");
-    }
-
-    // Generate token
-    const token = generateToken(user._id);
-
-    return {
-      _id: user._id,
-      name: user.name,
-      email: user.email,
-      role: user.role,
-      token,
-    };
-  } catch (error) {
-    throw error;
+  if (!user) {
+    throw new Error("Invalid email or password");
   }
+
+  if (!user.isActive) {
+    throw new Error("Account is disabled");
+  }
+
+  const isMatch = await bcrypt.compare(
+    password,
+    user.password
+  );
+
+  if (!isMatch) {
+    throw new Error("Invalid email or password");
+  }
+
+  user.lastLogin = new Date();
+
+  await user.save();
+
+  const token = generateToken(user._id);
+
+  return {
+    _id: user._id,
+    name: user.name,
+    email: user.email,
+    role: user.role,
+    token,
+  };
 };

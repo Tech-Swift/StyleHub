@@ -4,8 +4,8 @@ import {
 } from "../validations/authValidation.js";
 
 import {
-  registerUser,
-  loginUser,
+  registerUserService,
+  loginUserService,
 } from "../services/authService.js";
 
 export const register = async (req, res, next) => {
@@ -20,7 +20,7 @@ export const register = async (req, res, next) => {
     }
 
     // Register user
-    const userData = await registerUser(req.body);
+    const userData = await registerUserService(req.body);
 
     res.status(201).json(userData);
   } catch (err) {
@@ -40,7 +40,7 @@ export const login = async (req, res, next) => {
     }
 
     // Login user
-    const userData = await loginUser(req.body);
+    const userData = await loginUserService(req.body);
 
     res.json(userData);
   } catch (err) {

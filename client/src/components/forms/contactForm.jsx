@@ -4,7 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
 
 import { contactSchema } from "@/schemas/contactSchema";
-import { submitContactForm } from "@/api/contactApi";
+import { submitContactForm } from "@/api/public/contactApi";
 
 export default function ContactForm() {
   const [loading, setLoading] = useState(false);

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 import GalleryCard from "../cards/GalleryCard";
 
-import { getGallery } from "../../api/galleryApi";
+import { getGallery } from "@/api/public/galleryApi";
 
 const OurWork = () => {
   const [gallery, setGallery] = useState([]);

@@ -2,9 +2,7 @@ import { useEffect, useState } from "react";
 
 import TestimonialCard from "../cards/TestimonialCard";
 
-import {
-  getTestimonials,
-} from "../../api/testimonialApi";
+import { getTestimonials } from "@/api/public/testimonialApi";
 
 const Testimonials = () => {
   const [testimonials, setTestimonials] =

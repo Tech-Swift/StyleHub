@@ -4,7 +4,7 @@ import Footer from "./components/layout/Footer";
 import AuthPage from "@/pages/AuthPage";
 import Home from "./pages/Home";
 import { Routes, Route } from "react-router-dom";
-import { ThemeProvider } from "./components/themeProvider";
+import { ThemeProvider } from "@/providers/ThemeProvider";
 import { Toaster } from "sonner";
 import AuthModal from "@/components/cards/authModal";
 

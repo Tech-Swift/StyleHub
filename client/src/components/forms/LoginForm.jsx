@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 
 import api from "@/api/client";
-import { useAuth } from "@/components/context/AuthContext";
+import { useAuth } from "@/providers/context/AuthContext";
 
 export default function LoginForm({ onSwitch }) {
   const [form, setForm] = useState({
